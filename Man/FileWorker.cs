@@ -8,13 +8,15 @@ namespace Man
 {
     class FileWorker
     {
-        string path = @"input.txt";
         string[] rawData;
-        public string[] Load()
+        public string[] Load(string path)
         {
+            bool isInt;
+            int res;
             try
             {
                 rawData = File.ReadAllText(path).Split('\n');
+                isInt = Int32.TryParse(rawData[0], out res);
             }
             catch(FileNotFoundException)
             {
@@ -23,6 +25,10 @@ namespace Man
             if (rawData.Length < 3)
             {
                 throw new LackOfData("Lack of data! Some data may absent or written in one line");
+            }
+            if (isInt)
+            {
+                throw new FormatException("Name can't be a number!");
             }
             return rawData;
         }

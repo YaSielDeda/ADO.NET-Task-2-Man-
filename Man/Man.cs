@@ -10,6 +10,7 @@ namespace Man
         public int Age { get; set; }
         public int Weight { get; set; }
         public int Height { get; set; }
+        public Man() { }
 
         public Man(string name, int age, int weight, int height)
         {
@@ -32,7 +33,7 @@ namespace Man
         public int Year { get; set; }
         public int Course { get; set; }
         public int Group { get; set; }
-
+        public Student() { }
         public Student(string name, int age, int weight, int height, int year, int course, int group) : base(name, age, weight, height)
         {
             Year = year;
