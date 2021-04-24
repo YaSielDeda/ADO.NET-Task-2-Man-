@@ -26,7 +26,7 @@ namespace Man
                 $"{Environment.NewLine}Course: {Course}" +
                 $"{Environment.NewLine}Group: {Group}";
         }
-        public Man convertToMan()
+        public Man ConvertToMan()
         {
             return new Man(Name, Age, Weight, Height);
         }

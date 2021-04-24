@@ -8,6 +8,7 @@ namespace Man
 {
     public class ManWorker
     {
+        public static int ManMustHaveStrings = 4;
         public Man GetMan(string path)
         {
             var manFileModel = GetManFromFile(path);
@@ -18,7 +19,7 @@ namespace Man
         {
             string[] StringsFromFile;
             StringsFromFile = File.ReadLines(path).ToArray();
-            if (StringsFromFile.Length < 3)
+            if (StringsFromFile.Length != ManMustHaveStrings)
             {
                 throw new InvalidDataException("Lack of data! Some data may absent or written in one line");
             }
@@ -26,14 +27,31 @@ namespace Man
         }
         private Man ParseMan(ManFileModel manFileModel)
         {
-            if(  int.TryParse(manFileModel.Name, out var _) ||
-                !int.TryParse(manFileModel.Age, out var _) ||
-                !int.TryParse(manFileModel.Height, out var _) ||
-                !int.TryParse(manFileModel.Weight, out var _))
+            if(  Validation(manFileModel.Name) != true ||
+                !int.TryParse(manFileModel.Age, out var age) ||
+                !int.TryParse(manFileModel.Height, out var height) ||
+                !int.TryParse(manFileModel.Weight, out var weight))
             {
                 throw new FormatException("You provided wrong type of data! Check file for this issues.");
             }
-            return new Man(manFileModel.Name, int.Parse(manFileModel.Age), int.Parse(manFileModel.Height), int.Parse(manFileModel.Weight));
+            return new Man(manFileModel.Name, age, height, weight);
+        }
+        private bool Validation(string name)
+        {
+            if (int.TryParse(name, out var _))
+                return false;
+
+            char[] ViolatedSymbols = new char[] { '.', ',', '!', '@', '#', '№', '$', ';', '%', '^', ':', '&', '?', '*', '(', ')', '-', '_', '=', '+'};
+
+            foreach (var s in ViolatedSymbols)
+            {
+                if (name.Contains(s))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }

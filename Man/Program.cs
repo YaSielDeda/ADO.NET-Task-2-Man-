@@ -8,22 +8,22 @@ using System.IO;
 
 namespace Man
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            string manPath = @"manInput.txt";
-            string studentPath = @"studentInput.txt";
+            string manPath = "manInput.txt";
+            string studentPath = "studentInput.txt";
 
-            Man man = createMan(manPath);
+            Man man = CreateMan(manPath);
             Console.WriteLine(man);
 
             Console.WriteLine();
 
-            Student student = createStudent(studentPath);
+            Student student = CreateStudent(studentPath);
             Console.WriteLine(student);
         }
-        public static Man createMan(string path)
+        public static Man CreateMan(string path)
         {
             ManWorker _manWorker = new ManWorker();
             Man man = null;
@@ -39,7 +39,7 @@ namespace Man
             }
             return man;
         }
-        public static Student createStudent(string path)
+        public static Student CreateStudent(string path)
         {
             StudentWorker _studentWorker = new StudentWorker();
             Student student = null;
